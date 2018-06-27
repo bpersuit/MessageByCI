@@ -95,6 +95,7 @@
 				});
 			})
 
+			//前端对于输入内容的基本验证
 			function login_valication(){
 
 				var username = $("#user").val().trim();
@@ -102,6 +103,8 @@
 				var pas = $("#pass").val().trim();
 
 				var inputcode = $(".code").val().trim();
+
+				var cookieCode = getCookie("code");
 
 				if(username == null || username == '' ){
 
@@ -123,12 +126,28 @@
 
 					return false;
 
+				} 
+				if(cookieCode.toLowerCase() != inputcode.toLowerCase()){
+
+					alert("验证码输入错误");
+
+					return false;
 				}
 
 				//还需要对于相关的长度等等做限制验证
 
 				return true;
 
+			}
+
+			function getCookie(cname){
+			    var name = cname + "=";
+			    var ca = document.cookie.split(';');
+			    for(var i=0; i<ca.length; i++) {
+			        var c = ca[i].trim();
+			        if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+			    }
+			    return "";
 			}
 		</script>
 	</body>
