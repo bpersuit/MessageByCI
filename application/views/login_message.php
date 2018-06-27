@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="../resource/css/index.css"> 
 	</head>
 	<body>
+		<!-- 登录页面的主要显示区域 -->
 		<div id="myAlert" class="alert alert-warning" style="display:none;color：red;">
 			<a href="#" class="close" data-dismiss="alert">&times;</a>
 			<span></span>
@@ -42,7 +43,7 @@
 		<script>
 			
 			$(function(){
-				$("#myModal").modal("show");
+
 				//登录的异步处理函数
 				$(".btn").click(function(){
 
@@ -152,7 +153,7 @@
 				return true;
 
 			}
-
+			//获取cookie数据
 			function getCookie(cname){
 			    var name = cname + "=";
 			    var ca = document.cookie.split(';');

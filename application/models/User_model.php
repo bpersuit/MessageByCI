@@ -1,41 +1,38 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  
+ /**
+ 	user数据库表的一些基本操作
+ */
 class User_model extends CI_Model {
  
-	public function __construct()
-	 
-	    {
+	public function __construct(){
 	 
 	        parent::__construct();
 	 
 	        $this->load->database();
 	 
 	    }
-	 
+
+
 	public function insert($arr,$table){
 	 
 		$this->db->insert($table, $arr);
 	 
-	        if ($this->db->affected_rows() > 0)
+	    if ($this->db->affected_rows() > 0){
 	 
-	        {
+	        return $this->db->insert_id();
 	 
-	            return $this->db->insert_id();
+	    }else{
 	 
-	        }
+	        return FALSE;
 	 
-	        else
-	 
-	        {
-	 
-	            return FALSE;
-	 
-	        }
+	    }
 	 
 	}
-	public function get_all($table)
- 
-    {
+	/**
+	获取所有数据
+	*/
+	public function get_all($table){
  
         $this->db->select('*');
  

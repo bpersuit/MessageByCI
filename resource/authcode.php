@@ -1,4 +1,7 @@
 <?php
+	/**
+		主要用于生成验证码
+	*/
 	header("content-type:image/png");
 	$validateLength=4;
 	$strToDraw="";
@@ -25,7 +28,8 @@
   		$strToDraw=$strToDraw." ".$chars[$rand];
   		$sessioncode = $sessioncode."".$chars[$rand];
 	}
- 	$_SESSION['code'] = $sessioncode;
+ 	//$_SESSION['code'] = $sessioncode;
+ 	//将验证码放入cookie当中
  	setcookie('code',$sessioncode,-1,'/MessageByCI/');
 	 imagestring($imgRes,5,0,5,$strToDraw,$color);
 	 for($i=0;$i<100;$i++){
