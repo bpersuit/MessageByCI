@@ -67,7 +67,7 @@ class loginUser extends CI_Controller {
 
 			$returnArr['success'] =0;
 
-            $returnArr['message'] ='登录失败';
+            $returnArr['message'] ='用户名/密码错误';
 		}
 
 		echo json_encode($returnArr);

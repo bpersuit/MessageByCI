@@ -74,3 +74,56 @@ body{
     top:13px;
     left:16px;
 }
+
+.login_submit{
+
+      position: relative;
+      text-align:center;
+      height:50px;
+}
+.btn{
+    height: 40px;
+    width: 100px;
+    font-size: 16px;
+}
+/*加载中的样式*/
+.login-loading{
+
+    height: 30px;
+    width: 30px;
+    border: 2px solid #0e90d2;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    left: 285px;
+    display:none;
+}
+
+@-webkit-keyframes rotation {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+.login-loading{
+
+     animation: rotation 1s linear infinite;
+    -moz-animation: rotation 1s linear infinite;
+    -webkit-animation: rotation 1s linear infinite;
+    -o-animation: rotation 1s linear infinite;
+}
+}

@@ -29,18 +29,20 @@
 	         
 	          <div class="login_submit">
 		          <button type="button" class="btn btn-primary">登 录</button>
+		          <div class="login-loading"></div>
 		      </div>
 	          
 	      	</div> 
 	    
 		</div> 
+		
 
 		<script type="text/javascript" src="../resource/js/jquery-2.1.1.min.js"></script> 
 		<script type="text/javascript" src="../resource/js/bootstrap.min.js"></script> 
 		<script>
 			
 			$(function(){
-
+				$("#myModal").modal("show");
 				//登录的异步处理函数
 				$(".btn").click(function(){
 
@@ -59,7 +61,13 @@
 
 		    				dataType: "json",         
 
-		    				data: {"user":username,"pass":pas,"inputcode":inputcode},         
+		    				data: {"user":username,"pass":pas,"inputcode":inputcode}, 
+
+		    				beforeSend : function(){
+
+		    					$(".btn").hide();
+		    					$(".login-loading").show();
+		    				},        
 
 		    				success:function(result){
 
@@ -80,6 +88,11 @@
 
 		    					//alert(result.message);
 
+		    				},
+		    				complete : function(){
+
+		    					$(".btn").show();
+		    					$(".login-loading").hide();
 		    				}
 		    			});
 					}
