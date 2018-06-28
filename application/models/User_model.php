@@ -58,6 +58,19 @@ class User_model extends CI_Model {
  
          return $query;
     }
+
+    /**
+    	通过用户id获取用户的基本信息
+    */
+ 	public function getByUserId($userid){
+
+ 		$this->db->select('id,username')->where('id',$userid)->from('user');
+
+ 		$query = $this->db->get();
  
+        $query = $query->result_array();
+ 
+        return $query;
+ 	}
  
 }

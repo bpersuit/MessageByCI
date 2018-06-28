@@ -7,14 +7,12 @@ class login extends CI_Controller {
 	{
 		//session_start(); 
 		$data = '';
+
 		if(isset($_SESSION['user'])){
 
 		 	$data['user'] = $_SESSION['user'];
-
-		 	//echo $_SESSION['user'];
 		 }
 
-		// print_r($_SESSION['user']) ;
 		$this->load->view('login_message',$data);
 	}
 
