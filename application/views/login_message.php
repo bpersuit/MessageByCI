@@ -83,7 +83,7 @@
 
 			    					alert("登录成功");
 
-			    					//window.location.href = './messageHome.php';
+			    					window.location.href = '../message/index?userid='+result.success;
 
 			    				}
 

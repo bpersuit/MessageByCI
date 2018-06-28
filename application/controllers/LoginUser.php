@@ -3,9 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class loginUser extends CI_Controller {
 
-	public function __construct()
- 
-	{
+	public function __construct(){
 	 
 	parent::__construct();
 	 
@@ -52,7 +50,7 @@ class loginUser extends CI_Controller {
 
 			 if($dPass == $password){
 
-			 	$returnArr['success'] =1;
+			 	$returnArr['success'] = $users['0']['id'];
 
                 $returnArr['message'] ='登录成功';
 
