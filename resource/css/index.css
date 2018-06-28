@@ -96,7 +96,7 @@ body{
     border-radius: 50%;
     position: absolute;
     top: 0px;
-    left: 285px;
+    left: 270px;
     display:none;
 }
 
@@ -126,4 +126,20 @@ body{
     -webkit-animation: rotation 1s linear infinite;
     -o-animation: rotation 1s linear infinite;
 }
+.login-img{
+
+    position: absolute;
+    top: 0px;
+    left: 250px;
+    display: none;
+}
+.login-img img{
+
+    width:30px;
+    height:30px;
+}
+
+.redRemind{
+
+    border:1px solid red !important;
 }

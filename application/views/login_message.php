@@ -31,6 +31,7 @@
 	          <div class="login_submit">
 		          <button type="button" class="btn btn-primary">登 录</button>
 		          <div class="login-loading"></div>
+		          <div class="login-img"><img src="../resource/img/loginright.png"/></div>
 		      </div>
 	          
 	      	</div> 
@@ -44,8 +45,9 @@
 			
 			$(function(){
 
+
 				//登录的异步处理函数
-				$(".btn").click(function(){
+				$(".login_submit .btn").click(function(){
 
 					var username = $("#user").val().trim();
 					var pas = $("#pass").val().trim();
@@ -79,9 +81,17 @@
 			    					$("#myAlert > span").text(result.message);
 
 			    					$("#myAlert").show();
+
+			    					$(".btn").show();
+
+			    					$(".login-loading").hide();
+
 			    				}else{
 
-			    					alert("登录成功");
+			    					//alert("登录成功");
+
+			    					$(".login-loading").hide();
+			    					$(".login-img").show();
 
 			    					window.location.href = '../message/index?userid='+result.success;
 
@@ -92,8 +102,8 @@
 		    				},
 		    				complete : function(){
 
-		    					$(".btn").show();
-		    					$(".login-loading").hide();
+		    					//$(".btn").show();
+		    					//$(".login-loading").hide();
 		    				}
 		    			});
 					}
@@ -122,13 +132,18 @@
 
 				if(username == null || username == '' ){
 
-					alert("请输入用户名");
+					//alert("请输入用户名");
+
+					$(".login-form-user input").addClass("redRemind");
+
 
 					return false;
 				}
 				if(pas == null || pas == '' ){
 
-					alert("请输入密码");
+					//alert("请输入密码");
+
+					$(".login-form-pass input").addClass("redRemind");
 
 					return false;
 
@@ -136,7 +151,9 @@
 
 				if(inputcode ==''){
 
-					alert("请输入验证码");
+					//alert("请输入验证码");
+
+					$(".login-form-check input").addClass("redRemind");
 
 					return false;
 

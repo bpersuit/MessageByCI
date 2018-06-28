@@ -85,8 +85,8 @@
 		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		                <h4 class="modal-title" id="myModalLabel">提示</h4>
 		            </div>
-		            <div class="modal-body">
-		            	<div class="remindMessage">
+		            <div class="modal-body" style="min-height:225px;">
+		            	<div class="remindMessage" style="margin-left: 170px;margin-top:80px;">
 			            	<div class="modalImg"></div>
 			            	<div class="modalText">是否确定删除本条留言？</div>
 			            	<div style="clear:both;"></div>
@@ -111,8 +111,6 @@
 		<script type="text/javascript" src="../resource/js/jquery-2.1.1.min.js"></script> 
 		<script type="text/javascript" src="../resource/js/bootstrap.min.js"></script> 
 		<script>
-
-			
 			
 			/**
 				用户的删除操作
