@@ -299,3 +299,22 @@
     -webkit-transform: scale(1.0);
   }
 }
+
+.message-add-nologin{
+
+	height:100px;
+
+	margin-top: 20px;
+	background-color: #eee;
+	position: relative;
+}
+.message-add-nologinText{
+
+	height:20px;
+	line-height: 20px;
+	position: absolute;
+
+	top:40px;
+
+	left:45%;
+}

@@ -64,17 +64,33 @@
 					?>
 
 				</div>
-				<!--增加留言的面板-->
-				<div class="message-right-add">
-					<textarea placeholder="Please enter a comment…"></textarea>
-					<div class="submit">
-						<button type="button" class="btn btn-primary">提交</button>
-						<div class="addloading"></div>
-						<div class="addLoadingImg"><img src="../resource/img/loginright.png"/></div>
+				<?php 
+					if($loginuser != ''){
+				?>
+						<!--增加留言的面板-->
+						<div class="message-right-add">
+							<textarea placeholder="Please enter a comment…"></textarea>
+							<div class="submit">
+								<button type="button" class="btn btn-primary">提交</button>
+								<div class="addloading"></div>
+								<div class="addLoadingImg"><img src="../resource/img/loginright.png"/></div>
+							</div>
+
+						</div>
+				<?php
+					}else{
+
+				?>
+					<!--增加未登录用户的提示区域-->
+					<div class="message-add-nologin">
+						
+						<div class="message-add-nologinText"><a href='../login/'>登录</a>可以留言</div>
 					</div>
 
-				</div>
-
+				<?php
+				}
+				?>
+					
 			</div>
 
 		</div>

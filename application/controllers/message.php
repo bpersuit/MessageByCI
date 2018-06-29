@@ -63,6 +63,13 @@ class message extends CI_Controller {
 
 		$messageid = $_POST['messageid'];
 
+		if(!is_numeric($messageid)){
+
+			$this->load->view('error');
+
+			return;
+		};
+
 		$Message = $this->Message_model->getMessageById($messageid);
 
 		if(count($Message) != 1){
@@ -88,7 +95,6 @@ class message extends CI_Controller {
 
 		if($user[0]['id'] == $Message[0]['userid']){
 
-
 			//将删除数据标识位设置为1
 			$this->Message_model->updateMessage($messageid);
 
@@ -104,18 +110,18 @@ class message extends CI_Controller {
 
 		$content = trim($_POST['inputText']);
 
+		$receiveid = $_POST['receiveid'];
+
 		//对于输入的内容进行防注入/XSS
 
 		$content = $this->safefilter->filter($content);
 
-		if($content == ''){
+		if($content == '' || !is_numeric($receiveid)){
 
 			$this->load->view('error');
 
 			return;
 		}
-
-		$receiveid = $_POST['receiveid'];
 
 		//对于权限进行验证
 		if(!isset($_SESSION['user'])){
