@@ -32,7 +32,8 @@ class loginUser extends CI_Controller {
 
 		$code = strtoupper(trim($_COOKIE['code']));
 
-		if($code != $inputcode){
+		//验证字符串的合法性
+		if(!preg_match("/^[0-9a-zA-Z\s]+$/",$code) ||  strlen($code) != 4 || $code != $inputcode){
 
 			$returnArr['success'] =0;
 
@@ -41,9 +42,8 @@ class loginUser extends CI_Controller {
             echo json_encode($returnArr);
 
             exit();
-
 		}
-
+	
 		if(sizeof($users) > 0){
 
 			$dPass = $users['0']['password'];

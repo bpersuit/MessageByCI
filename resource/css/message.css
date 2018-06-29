@@ -192,6 +192,19 @@
     display: none;
 }
 
+.addLoadingImg {
+
+	position: absolute;
+    top: 5px;
+    right: 23px;
+    display:none;
+}
+.addLoadingImg img{
+
+	width:30px;
+	height:30px;
+}
+
 
 /*顶部的头部数据*/
 .message-header{

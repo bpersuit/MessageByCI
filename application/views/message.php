@@ -70,6 +70,7 @@
 					<div class="submit">
 						<button type="button" class="btn btn-primary">提交</button>
 						<div class="addloading"></div>
+						<div class="addLoadingImg"><img src="../resource/img/loginright.png"/></div>
 					</div>
 
 				</div>
@@ -225,17 +226,26 @@
 
 		    				if(result == 1){
 
-		    					alert("保存成功");
+		    					$(".addLoadingImg").show();
+
+		    					$(".addloading").hide();
+
+		    					//alert("保存成功");
 
 		    					window.location.reload();
+
+		    				}else{
+
+		    					$(".addloading").hide();
+		    					$(".message-right-add .btn").show();
 
 		    				}
 
 		    			},
 		    			complete : function(){
 
-		    				$(".addloading").hide();
-		    				$(".message-right-add .btn").show();
+		    				// $(".addloading").hide();
+		    				// $(".message-right-add .btn").show();
 
 		    			}
 

@@ -12,6 +12,8 @@ class message extends CI_Controller {
 		$this->load->model('Message_model');
 
 		$this->load->model('User_model');
+
+		$this->load->library('safefilter');
 	 
 	}
 
@@ -21,6 +23,15 @@ class message extends CI_Controller {
 	public function index(){
 
 		$userid = $_GET['userid'];
+
+		//验证userid的合法性
+		if(!preg_match("/^[0-9\s]+$/",$userid)){
+
+			$this->load->view('error');
+
+			//exit();
+			return;
+		}
 
 		$Message = $this->Message_model->getByuserId($userid);
 
@@ -54,6 +65,13 @@ class message extends CI_Controller {
 
 		$Message = $this->Message_model->getMessageById($messageid);
 
+		if(count($Message) != 1){
+
+			$this->load->view('error');
+
+			return;
+		}
+
 
 		//对于删除操作的权限进行基本的验证
 
@@ -85,6 +103,17 @@ class message extends CI_Controller {
 	public function addMessage(){
 
 		$content = trim($_POST['inputText']);
+
+		//对于输入的内容进行防注入/XSS
+
+		$content = $this->safefilter->filter($content);
+
+		if($content == ''){
+
+			$this->load->view('error');
+
+			return;
+		}
 
 		$receiveid = $_POST['receiveid'];
 
