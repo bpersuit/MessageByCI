@@ -180,7 +180,7 @@
 
 		    			success: function(result){
 
-		    				if(result == 1){
+		    				if(result.message == 1){
 
 		    					$(".modal-loading img").show();
 
@@ -240,7 +240,7 @@
 
 		    				console.log(result);
 
-		    				if(result == 1){
+		    				if(result.message == 1){
 
 		    					$(".addLoadingImg").show();
 

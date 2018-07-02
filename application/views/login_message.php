@@ -43,8 +43,7 @@
 		<script type="text/javascript" src="../resource/js/bootstrap.min.js"></script> 
 		<script>
 			
-			$(function(){
-
+			$(function(){			
 
 				//登录的异步处理函数
 				$(".login_submit .btn").click(function(){

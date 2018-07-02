@@ -25,7 +25,7 @@ class message extends CI_Controller {
 		$userid = $_GET['userid'];
 
 		//验证userid的合法性
-		if(!preg_match("/^[0-9\s]+$/",$userid)){
+		if(!preg_match("/^[0-9]+$/",$userid)){
 
 			$this->load->view('error');
 
@@ -33,9 +33,36 @@ class message extends CI_Controller {
 			return;
 		}
 
+		$starttime = explode(' ',microtime());
+
 		$Message = $this->Message_model->getByuserId($userid);
 
-		$data['messageList'] = $Message;
+		$endtime = explode(' ',microtime());
+ 		$thistime = $endtime[0]+$endtime[1]-($starttime[0]+$starttime[1]);
+ 		$thistime = round($thistime,6);
+ 		echo "执行单次查询耗时：".$thistime." 秒。<br/>";
+ 		
+ 		$data['messageList'] = $Message;
+
+
+
+ 		//采用先读取留言数据，然后在获取数据的创建者的基本信息
+
+ 		$starttime = explode(' ',microtime());
+
+ 		$MessageList = $this->Message_model->getMessageByUserId($userid);
+
+ 		foreach ($MessageList as $messageItem) {
+
+ 			$messageUser = $this->User_model->getByUserId($userid);
+ 			
+ 		}
+
+ 		$endtime = explode(' ',microtime());
+ 		$thistime = $endtime[0]+$endtime[1]-($starttime[0]+$starttime[1]);
+ 		$thistime = round($thistime,6);
+ 		echo "执行分别查询耗时：".$thistime." 秒。";
+
 
 		$user = $this->User_model->getByUserId($userid);
 
@@ -43,13 +70,17 @@ class message extends CI_Controller {
 
 		$data['loginuser'] = '';
 
-		if(isset($_SESSION['user'])){
+		// if(isset($_SESSION['user'])){
 
-		 	$data['loginuser'] = $_SESSION['user'];
-		 }
+		//  	$data['loginuser'] = $_SESSION['user'];
+		//  }
 
-		//print_r($user[0]['username']);
-		//print_r(count($Message));
+		$loginUser = $this->User_model->getCookieUser();
+
+		if($user != null){
+
+			$data['loginuser'] = $loginUser;
+		}
 
 		$this->load->view('message',$data);
 	} 
@@ -80,28 +111,42 @@ class message extends CI_Controller {
 		}
 
 
-		//对于删除操作的权限进行基本的验证
+		//对于删除操作的权限进行基本的验证 ---更换为cookie验证
 
-		if(!isset($_SESSION['user'])){
+		// if(!isset($_SESSION['user'])){
+
+		// 	$this->load->view('login_message');
+
+		// 	exit();
+		// }
+
+		$loginUser = $this->User_model->getCookieUser();
+
+		if($loginUser == null){
 
 			$this->load->view('login_message');
 
 			exit();
 		}
 
-		$loginUser = $_SESSION['user'];
+		//$loginUser = $_SESSION['user'];
 
 		$user = $this->User_model->getByUserName('user',$loginUser);
+
+		$returnArr=array();
 
 		if($user[0]['id'] == $Message[0]['userid']){
 
 			//将删除数据标识位设置为1
 			$this->Message_model->updateMessage($messageid);
 
-			echo 1;
+			$returnArr['message'] = 1;
 
 		}else
-			echo 0;
+			
+			$returnArr['message'] = 0;
+
+		echo json_encode($returnArr);
 
 	}
 
@@ -124,14 +169,23 @@ class message extends CI_Controller {
 		}
 
 		//对于权限进行验证
-		if(!isset($_SESSION['user'])){
+		// if(!isset($_SESSION['user'])){
+
+		// 	$this->load->view('login_message');
+
+		// 	exit();
+		// }
+
+		// $loginUser = $_SESSION['user'];
+
+		$loginUser = $this->User_model->getCookieUser();
+
+		if($loginUser == null){
 
 			$this->load->view('login_message');
 
 			exit();
 		}
-
-		$loginUser = $_SESSION['user'];
 
 		$user = $this->User_model->getByUserName('user',$loginUser);
 
@@ -152,9 +206,15 @@ class message extends CI_Controller {
 
         );
 
-        $this->Message_model->insertMessage($data);
+       $this->Message_model->insertMessage($data);
 
-        echo 1;
+       $returnArr=array();
+
+       $returnArr['message'] = 1;
+
+       echo json_encode($returnArr);
+
+
 
 	}
 

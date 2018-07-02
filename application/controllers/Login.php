@@ -3,6 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class login extends CI_Controller {
 
+	public function __construct(){
+	 
+		parent::__construct();
+
+		$this->load->helper('cookie');
+	 
+		$this->load->model('User_model');
+	 
+	}
+
 	public function index(){
 		//session_start(); 
 		$data = '';
@@ -17,7 +27,9 @@ class login extends CI_Controller {
 
 	public function test(){
 
-		echo $_COOKIE['code'];
+		$user = $this->User_model->getCookieUser();
+
+		echo $user;
 	}
 
 }

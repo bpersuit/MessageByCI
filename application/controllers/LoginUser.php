@@ -28,12 +28,10 @@ class loginUser extends CI_Controller {
 
 		$returnArr=array();
 
-		$users = $this->User_model->getByUserName('user',$username);
-
 		$code = strtoupper(trim($_COOKIE['code']));
 
 		//验证字符串的合法性
-		if(!preg_match("/^[0-9a-zA-Z\s]+$/",$code) ||  strlen($code) != 4 || $code != $inputcode){
+		if(!preg_match("/^[0-9a-zA-Z]+$/",$code) ||  strlen($code) != 4 || $code != $inputcode){
 
 			$returnArr['success'] =0;
 
@@ -43,6 +41,8 @@ class loginUser extends CI_Controller {
 
             exit();
 		}
+
+		$users = $this->User_model->getByUserName('user',$username);
 	
 		if(sizeof($users) > 0){
 
@@ -56,7 +56,16 @@ class loginUser extends CI_Controller {
 
                 $returnArr['user'] = $username;
 
-                $_SESSION['user'] = $username;
+                $agent  = $_SERVER['HTTP_USER_AGENT'];
+
+                //token的生成方式--可以使用其他方式，目前暂时使用简单的加密
+                $token = md5($username.$password.$agent);//可以继续复杂化
+
+                setcookie('username', $username,-1,'/MessageByCI/');
+
+                setcookie('token', $token,-1,'/MessageByCI/');
+
+              //  $_SESSION['user'] = $username;
 
 			 }
 		}

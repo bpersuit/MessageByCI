@@ -83,6 +83,18 @@
 
 		}
 
+		public function getMessageByUserId($userid){
+
+			$this->db->select('*')->where('receiveid',$userid)->from('message');
+
+			$query = $this->db->get();
+
+			$query = $query->result_array();
+
+			return $query;
+
+		}
+
 	}
 
 ?>

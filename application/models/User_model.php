@@ -72,5 +72,54 @@ class User_model extends CI_Model {
  
         return $query;
  	}
+
+ 	/**
+	插入一条数据记录
+ 	*/
+
+ 	public function insertUser($data){
+
+ 		$this->db->insert('user', $data); 
+ 	}
+
+ 	/*使用cookie验证*/
+ 	public function getCookieUser(){
+
+  		$username = trim($_COOKIE['username']);
+
+  		//加入token验证
+
+  		$token = trim($_COOKIE['token']);
+
+  		$agent  = $_SERVER['HTTP_USER_AGENT'];
+
+		if($username != null && preg_match("/^[a-zA-Z]+$/",$username)){
+
+			$user = $this->getByUserName('user',$username);
+
+			if($user == null)
+
+				return null;
+			else{
+
+				$mdToken = md5($user[0]['username'].$user[0]['password'].$agent);
+
+				if($mdToken == $token){
+
+					return $user[0]['username'];
+
+				}else{
+
+					return null;
+				}
+
+			}
+
+				
+		}else
+
+		return null;
+
+  	}
  
 }

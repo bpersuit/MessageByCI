@@ -16,12 +16,13 @@ class logout extends CI_Controller {
 
 
 
-		$username = $_SESSION['user'];
+		// $username = $_SESSION['user'];
 		
-		$users = $this->User_model->getByUserName('user',$username);	 
+		// $users = $this->User_model->getByUserName('user',$username);	 
 
-		unset($_SESSION); 
-    	session_destroy(); 
+		// unset($_SESSION);
+		 
+  //   	session_destroy(); 
 
     	echo "<script>window.location.href='./login/'</script>";
 	}
