@@ -48,7 +48,9 @@ class loginUser extends CI_Controller {
 
 			$dPass = $users['0']['password'];
 
-			 if($dPass == $password){
+			$password = md5($password);
+
+			if($dPass == $password){
 
 			 	$returnArr['success'] = $users['0']['id'];
 
@@ -67,7 +69,7 @@ class loginUser extends CI_Controller {
 
               //  $_SESSION['user'] = $username;
 
-			 }
+			}
 		}
 
 		if(!isset($returnArr['success'])){
