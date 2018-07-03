@@ -24,6 +24,10 @@ class logout extends CI_Controller {
 		 
   //   	session_destroy(); 
 
+		setcookie('username', NULL,-1,'/MessageByCI/');
+
+		setcookie('token', NULL,-1,'/MessageByCI/');
+
     	echo "<script>window.location.href='./login/'</script>";
 	}
 

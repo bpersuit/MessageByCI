@@ -85,40 +85,39 @@ class User_model extends CI_Model {
  	/*使用cookie验证*/
  	public function getCookieUser(){
 
-  		$username = trim($_COOKIE['username']);
+ 		if(isset($_COOKIE['username']) && isset($_COOKIE['token'])){
 
-  		//加入token验证
+ 			$username = trim($_COOKIE['username']);
 
-  		$token = trim($_COOKIE['token']);
+ 			$token = trim($_COOKIE['token']);
 
-  		$agent  = $_SERVER['HTTP_USER_AGENT'];
+  			$agent  = $_SERVER['HTTP_USER_AGENT'];
 
-		if($username != null && preg_match("/^[a-zA-Z]+$/",$username)){
+  			if($username != null && preg_match("/^[a-zA-Z]+$/",$username)){
 
-			$user = $this->getByUserName('user',$username);
+				$user = $this->getByUserName('user',$username);
 
-			if($user == null)
+				if($user != null){
 
-				return null;
-			else{
+					$mdToken = md5($user[0]['username'].$user[0]['password'].$agent);
 
-				$mdToken = md5($user[0]['username'].$user[0]['password'].$agent);
+					if($mdToken == $token){
 
-				if($mdToken == $token){
+						return $user[0]['username'];
 
-					return $user[0]['username'];
+					}
 
-				}else{
-
-					return null;
 				}
-
+				
 			}
 
-				
-		}else
+ 		}
 
-		return null;
+ 		setcookie('username', NULL,-1,'/MessageByCI/');
+
+		setcookie('token', NULL,-1,'/MessageByCI/');
+
+ 		return null;
 
   	}
  

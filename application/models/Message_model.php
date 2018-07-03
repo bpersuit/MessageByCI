@@ -85,7 +85,7 @@
 
 		public function getMessageByUserId($userid){
 
-			$this->db->select('*')->where('receiveid',$userid)->from('message');
+			$this->db->select('*')->where('receiveid',$userid)->where('hasdel',0)->from('message');
 
 			$query = $this->db->get();
 

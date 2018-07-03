@@ -59,22 +59,7 @@
 	overflow: hidden;
 	padding-left:20px;
 }
-.message-right-all{
 
-	border-left:1px solid #eee;
-	border-right:1px solid #eee;
-	border-bottom:1px solid #eee;
-}
-.message-item{
-
-	border-top:1px solid #eee;
-	min-height: 100px;
-	position: relative;
-}
-.message-item-content{
-	padding:10px;
-	font-size:16px;
-}
 .message-item-bottom{
 
 	color:#666;
@@ -212,31 +197,7 @@
 	height:50px;
 	border-bottom: 1px solid #eee;
 }
-.logined{
 
-	float:right;
-	margin-right:10%;
-	line-height:50px;
-	font-size:16px;
-}
-.logined span{
-
-	font-weight:bold;
-}
-
-.logined a{
-
-	color:#999;
-	margin-left:10px;
-}
-.notlogin {
-
-	float:right;
-	margin-right:10%;
-	line-height:50px;
-	font-size:16px;
-	padding-right:10px;
-}
 .modalImg{
 
 	width: 48px;

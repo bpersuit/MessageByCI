@@ -33,35 +33,21 @@ class message extends CI_Controller {
 			return;
 		}
 
-		$starttime = explode(' ',microtime());
-
-		$Message = $this->Message_model->getByuserId($userid);
-
-		$endtime = explode(' ',microtime());
- 		$thistime = $endtime[0]+$endtime[1]-($starttime[0]+$starttime[1]);
- 		$thistime = round($thistime,6);
- 		echo "执行单次查询耗时：".$thistime." 秒。<br/>";
- 		
- 		$data['messageList'] = $Message;
-
-
-
  		//采用先读取留言数据，然后在获取数据的创建者的基本信息
 
  		$starttime = explode(' ',microtime());
 
  		$MessageList = $this->Message_model->getMessageByUserId($userid);
 
- 		foreach ($MessageList as $messageItem) {
+ 		foreach ($MessageList as &$messageItem) {
 
- 			$messageUser = $this->User_model->getByUserId($userid);
+ 			$messageUser = $this->User_model->getByUserId($messageItem['userid']);
+
+ 			$messageItem['username'] = $messageUser[0]['username'];
  			
  		}
 
- 		$endtime = explode(' ',microtime());
- 		$thistime = $endtime[0]+$endtime[1]-($starttime[0]+$starttime[1]);
- 		$thistime = round($thistime,6);
- 		echo "执行分别查询耗时：".$thistime." 秒。";
+ 		$data['messageList'] = $MessageList;
 
 
 		$user = $this->User_model->getByUserId($userid);

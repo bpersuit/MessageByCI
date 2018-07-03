@@ -8,15 +8,23 @@
 	<body>
 		<!--留言板的头部数据-->
 		<div class="message-header">
-			<?php 
-				if($loginuser != '')
-					echo "<div class='logined'>当前登录用户:<span>".$loginuser."</span><a href='../logout'>退出</a></div>";
-				else
-					echo "<div class='notlogin'><a href='../login/'>登录</a></div>";
-			?>	
-
-			<div style='clear:both;'></div>
+			<nav class="navbar navbar-default" role="navigation">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">留言板</a>
+			    </div>
+			    <ul class="nav navbar-nav navbar-right">
+			    	<?php 
+						if($loginuser != '')
+							echo "<li class='logined'><a href='../logout''><span class='glyphicon glyphicon-user' style='margin-right:5px;'></span>".$loginuser."</a></li>";
+						else
+							echo "<li class='notlogin'><a href='../login/''><span class='glyphicon glyphicon-log-in'></span> 登录</a></li>";
+					?>			     
+			    </ul>
+			  </div>
+			</nav>
 		</div>
+		<div style='clear:both;'></div>
 		<!--针对不同用户的显示留言板页面-->
 		<div class="message-main">
 			<!--主要用于显示被访问人的基本信息-->
@@ -33,36 +41,38 @@
 			<div class="message-right">
 				<!-- 渲染该用户的留言板的所有的信息-->
 				<div class="message-right-all">
-					<?php 
-						if(count($messageList) == 0){
+					<ul class="list-group">
 
-							echo "<div class='nomessage'>暂时还没有留言哦</div>";
-						}
+						<?php 
+							if(count($messageList) == 0){
 
-						foreach ($messageList as $key => $value) {
+								echo "<div class='nomessage'>暂时还没有留言哦</div>";
+							}
 
-					?>
-						<div class="message-item message-item<?php echo $value['id']; ?>">
+							foreach ($messageList as $key => $value) {
 
-							<div class="message-item-content"><?php echo $value['content']; ?></div>
+						?>
+							<li class="list-group-item message-item message-item<?php echo $value['id']; ?>" style="min-height:80px;">
 
-							<div class="message-item-bottom">
-								发表人：<span><?php echo $value['username']; ?></span>
-								发表时间:<span><?php echo $value['createdate']; ?></span>
-								<?php 
-									if($loginuser == $value['username']){
+								<?php echo $value['content']; ?>
 
-										echo "<span class='delete' messageid=".$value['id'].">删除</span>";
-									}
-								?>
-							</div>
-							<div style="clear:both;"></div>
-						</div>
-					<?php
-						}
+								<div class="message-item-bottom">
+									发表人：<span><?php echo $value['username']; ?></span>
+									发表时间:<span><?php echo $value['createdate']; ?></span>
+									<?php 
+										if($loginuser == $value['username']){
 
-					?>
-
+											echo "<span class='delete' messageid=".$value['id'].">删除</span>";
+										}
+									?>
+								</div>
+								
+							</li>
+						<?php
+							}
+						?>			
+					</ul>
+					
 				</div>
 				<?php 
 					if($loginuser != ''){
@@ -179,6 +189,8 @@
 		    			data: {messageid: messageid},
 
 		    			success: function(result){
+
+		    				console.log(result);
 
 		    				if(result.message == 1){
 
