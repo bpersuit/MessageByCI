@@ -21,10 +21,9 @@ class loginUser extends CI_Controller {
 	*/
 	public function index()
 	{
-		 $username  = trim($_POST['user']);
-		 $password = trim($_POST['pass']);
-		// $inputcode =  strtoupper(trim($_POST['code']));
-		 $inputcode =  strtoupper(trim($_POST['inputcode']));
+		$username  = trim($_POST['user']);
+		$password = trim($_POST['pass']);
+		$inputcode =  strtoupper(trim($_POST['inputcode']));
 
 		$returnArr=array();
 
@@ -60,7 +59,7 @@ class loginUser extends CI_Controller {
 
                 $agent  = $_SERVER['HTTP_USER_AGENT'];
 
-                //token的生成方式--可以使用其他方式，目前暂时使用简单的加密
+                //token的生成方式--使用用户名密码以及浏览器的相关信息--可以使用其他方式，目前暂时使用简单的加密
                 $token = md5($username.$password.$agent);//可以继续复杂化
 
                 setcookie('username', $username,-1,'/MessageByCI/');

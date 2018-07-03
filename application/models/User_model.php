@@ -82,7 +82,7 @@ class User_model extends CI_Model {
  		$this->db->insert('user', $data); 
  	}
 
- 	/*使用cookie验证*/
+ 	/*使用cookie验证,通过获取的cookie中的用户名以及token来进行验证*/
  	public function getCookieUser(){
 
  		if(isset($_COOKIE['username']) && isset($_COOKIE['token'])){
